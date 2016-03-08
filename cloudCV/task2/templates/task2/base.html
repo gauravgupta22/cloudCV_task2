@@ -1,0 +1,46 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" >
+
+<head>
+	<title>{{title}}</title>
+	<link rel="stylesheet" href="{% static "lib/bootstrap/dist/css/bootstrap.min.css" %}">
+	<link rel="stylesheet" href="{% static "task2/css/main.css" %}">
+</head>
+
+<body>
+	<div class="ng-cloak">
+	<section class="content">
+			{% verbatim %}
+			<section ui-view></section>
+			{% endverbatim %}
+	</section>
+	</div>
+</body>
+	<!--MainModule-->
+	<script src="{% static "lib/underscore/underscore.js" %}"></script>
+	<script src="{% static "lib/angular/angular.js" %}"></script>
+	<script src="{% static "lib/angular-resource/angular-resource.js" %}"></script>
+	<script src="{% static "lib/angular-ui-router/release/angular-ui-router.js" %}"></script>
+	<script src="{% static "lib/angular-cookies/angular-cookies.js" %}"></script>
+	<script src="{% static "lib/angular-animate/angular-animate.js" %}"></script>
+	<script src="{% static "lib/angular-sanitize/angular-sanitize.js" %}"></script>
+	<script src="{% static "lib/angular-ui-utils/ui-utils.js" %}"></script>
+	<script src="{% static "lib/angular-touch/angular-touch.js" %}"></script>
+	<script src="{% static "lib/angular-bootstrap/ui-bootstrap-tpls.js" %}"></script>
+	<script src="{% static "config.js" %}"></script>
+	<script src="{% static "application.js" %}"></script>
+	
+	
+	<!--task2-->
+	<script src="{% static "task2/task2.module.js" %}"></script>
+	<script src="{% static "task2/controllers/myctrl.js" %}"></script>
+
+	<script src="{% static "task2/config/routes.js" %}"></script>
+	<script src="{% static "task2/directives/FileModel.js" %}"></script>
+	<script src="{% static "task2/directives/imageOnReload.js" %}"></script>
+	
+	
+
+</html>
