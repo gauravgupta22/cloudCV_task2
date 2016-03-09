@@ -34,6 +34,7 @@ angular.module('task2').controller('MyCtrl', ['$scope','$http','$log','$uibModal
 
   $scope.pipeline=[];
 
+  $scope.wait=false;
 
   $scope.addModule=function(index){
     $scope.modulePipeline.push($scope.modules[index]);
@@ -45,6 +46,23 @@ angular.module('task2').controller('MyCtrl', ['$scope','$http','$log','$uibModal
   }
 
   $scope.resultUrls=[];
+
+  $scope.sampleFile=null;
+
+  $scope.sampleImageSelected=false;
+
+  $scope.showErrorMessage=false;
+
+  $scope.sampleImageUpload=function(url){
+
+    $http.get(url,{responseType: "blob"}).success((data) => {
+      var file = new File([data], "sample.jpg");
+      $scope.sampleFile=file;
+      $scope.sampleImageSelected=true;
+    });
+  }
+
+
 
   $scope.openImageModal= function (index) {
 
@@ -69,9 +87,24 @@ angular.module('task2').controller('MyCtrl', ['$scope','$http','$log','$uibModal
     });
   };
 
-  $scope.uploadFile = function(){
+  $scope.imageSelectedName=null;
+  $scope.imageSelected=false;
 
+   $scope.uploadFileChanged = function(event){
+        var filename = event.target.files[0].name;
+        $scope.imageSelected=true;
+        $scope.imageSelectedName=filename;
+        $scope.$apply();
+  };
+
+  
+  $scope.uploadFile = function(){
+        $scope.wait=true;
         var file = $scope.myFile;
+
+        if($scope.sampleFile){
+          file = $scope.sampleFile;
+        }
     
         var uploadUrl = "/upload";
         var fd = new FormData();
@@ -87,10 +120,14 @@ angular.module('task2').controller('MyCtrl', ['$scope','$http','$log','$uibModal
           console.log(response.urls);
           $scope.postError=null;
           $scope.resultUrls=response.urls;
+          $scope.wait=false;
+          $scope.showErrorMessage=false;
         })
         .error(function(error){
           console.log(error);
           $scope.postError="ERROR: "+error;
+          $scope.wait=false;
+          $scope.showErrorMessage=true;
         });
     };
 

@@ -5,14 +5,15 @@
 
 	<h1 class="text-center box" style="width:850px;padding:5px;margin-left:auto;margin-right:auto;">CloudCV GSOC 2016 - Toy Computer Vision IDE</h1>
   
-  <br><br><br>
+  <br><br>
   
-
+ 
+    
   <div class="container-fluid">
   <div class="row" >
   
 
-  <div class="text-center" style="color:red;font-size:15px;">{{postError}}</div>
+  <div class="text-center bg-danger" ng-class="{'hideMessage':!showErrorMessage}" style="color:red;font-size:15px;height:20px;">{{postError}}</div>
 
 
 
@@ -70,9 +71,15 @@
     <form>
     <br>
     <div class="form-group">
-    <label for="imageInputFile">File input</label>
-    <input type="file" id="imageInputFile" file-model="$parent.myFile"/>
+    <label for="imageInputFile">Image input</label>
+    <div class="text-center bg-success" ng-class="{'hideMessage':!imageSelected}" style="color:green;font-size:15px;margin-bottom:5px;">{{imageSelectedName}} selected</div>
+    <input type="file" id="imageInputFile" file-model="$parent.myFile" custom-on-change="uploadFileChanged"/>
     </div>
+    <b>or choose a Sample image</b>
+    <div class="text-center bg-success" ng-class="{'hideMessage':!sampleImageSelected}" style="color:green;font-size:15px;">Image selected</div>
+     Click on image to select.
+    <a href="#"><img class="img-thumbnail" style="width:200px;height:150px;margin-left:auto;margin-right:auto;display:block;" ng-click="sampleImageUpload('/static/task2/images/sample.jpg')" ng-src="/static/task2/images/sample.jpg"></a>
+    Nothing is precomputed. It will be treated as fresh upload.
     </form>
   </div>
   
@@ -224,7 +231,7 @@
     <h4 class="text-center">Set Parameters :</h4>
     </div>
     <br>
-    <b>Select a module to set parameters</b>
+    <div class="text-center"><b>Select a module to set parameters</b></div>
   </div>
 
   
@@ -238,7 +245,8 @@
 <div class="col-md-4">
   <div class="row" style="padding-top:8px;">
     <h4 class="text-center" >Intermediate Outputs</h4>
-    </div>
+    
+    
 
 <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
@@ -253,7 +261,8 @@
     </script>
 
 
-    <br>
+    
+  <div class="text-center" ng-if="resultUrls.length">select a image to see fullscreen</div><br>
   <div ng-repeat="choice in resultUrls track by $index">
   <div class="row">
     <div ng-if="$index>0" class="col-md-5 text-right" style="padding-top:60px;font-size:15px"><b>{{pipeline[$index-1].name}}</b></div>
@@ -270,9 +279,9 @@
 
 </div>
 </div>
-<button ng-click="uploadFile()" class="btn btn-primary btn-lg" style="margin-left:520px;margin-top:40px;margin-bottom:20px;">Submit Pipeline</button>
-<p class="text-center">Submitted by Gaurav Gupta &nbsp&nbsp&nbsp&nbsp&nbspemail: gauravguptakgn@gmail.com &nbsp&nbsp&nbsp&nbsp&nbspmo: +917860931204</p>
+<button ng-click="uploadFile()" class="btn btn-primary btn-lg" style="margin-left:520px;margin-top:40px;margin-bottom:10px;">Submit Pipeline</button>
+<p class="text-center">submitted by Gaurav Gupta &nbsp&nbsp&nbsp&nbsp&nbspemail: gauravguptakgn@gmail.com &nbsp&nbsp&nbsp&nbsp&nbspmo: +917860931204</p>
 
-
+ <div class="loadingmodal" ng-if="wait"><!-- Place at bottom of page --></div>
 
 </section>

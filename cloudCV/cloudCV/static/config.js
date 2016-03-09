@@ -9,7 +9,6 @@ var ApplicationConfiguration = (function() {
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
 		// Create angular module
-		console.log(moduleName);
 		angular.module(moduleName, dependencies || []);
 
 		// Add the module to the AngularJS configuration file

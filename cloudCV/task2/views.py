@@ -18,7 +18,7 @@ def randomword(length):
 
 def index(request):
     #context = {'latest_question_list': latest_question_list}
-    return render(request, 'task2/base.html',{'title':'madhur'})
+    return render(request, 'task2/base.html',{'title':'task2 demo'})
 
 
 def imageUpload(request):
@@ -30,6 +30,7 @@ def imageUpload(request):
             return HttpResponseServerError("No image found in Input Module")
         
         s=datetime.now().strftime('%Y%m%d%H%M%S')
+        print image.name
         ext=image.name.split(".")[-1].lower()
         image_name=s+randomword(5)+"0."+ext
 
