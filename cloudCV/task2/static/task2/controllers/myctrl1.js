@@ -11,12 +11,12 @@ $scope.moduleParams ={
 	"input":{},
 	"output":{},
     "rgb2grayscale":{},
-    "image_blending":{"weight":null},
-    "smoothen":{"width":null,"height":null},
-    "edge_detection":{"minVal":null,"maxVal":null},
-    "sobel_filter":{"ddepth":null,"xorder":null,"yorder":null,"ksize":null},
-    "binary_threshold":{"thresholdValue":null,"maxVal":null},
-    "resize":{"height":null,"width":null,"interpolation":null},
+    "image_blending":{"weight":0.7},
+    "smoothen":{"width":5,"height":5},
+    "edge_detection":{"minVal":100,"maxVal":200},
+    "sobel_filter":{"ddepth":null,"xorder":1,"yorder":0,"ksize":5},
+    "binary_threshold":{"thresholdValue":127,"maxVal":255},
+    "resize":{"height":300,"width":300,"interpolation":null},
  };
 
  $scope.moduleAnchors ={
