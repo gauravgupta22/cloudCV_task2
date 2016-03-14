@@ -9,6 +9,7 @@ return {
             scope.$apply(function(){
                 modelSetter(scope, element[0].files[0]);
             });
+            scope.$apply();
         });
     }
 };

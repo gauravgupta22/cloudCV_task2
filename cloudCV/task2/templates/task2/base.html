@@ -7,6 +7,7 @@
 	<title>{{title}}</title>
 	<link rel="stylesheet" href="{% static "lib/bootstrap/dist/css/bootstrap.min.css" %}">
 	<link rel="stylesheet" href="{% static "task2/css/main.css" %}">
+	<link rel="stylesheet" href="{% static "task2/css/jsplumb.css" %}">
 </head>
 
 <body>
@@ -29,6 +30,9 @@
 	<script src="{% static "lib/angular-ui-utils/ui-utils.js" %}"></script>
 	<script src="{% static "lib/angular-touch/angular-touch.js" %}"></script>
 	<script src="{% static "lib/angular-bootstrap/ui-bootstrap-tpls.js" %}"></script>
+	<script src="{% static "lib/jquery/dist/jquery.min.js" %}"></script>
+	<script src="{% static "lib/jquery-ui/jquery-ui.min.js" %}"></script>
+	<script src="{% static "lib/jsPlumb/dist/js/jsPlumb-2.0.7-min.js" %}"></script>
 	<script src="{% static "config.js" %}"></script>
 	<script src="{% static "application.js" %}"></script>
 	
@@ -36,6 +40,7 @@
 	<!--task2-->
 	<script src="{% static "task2/task2.module.js" %}"></script>
 	<script src="{% static "task2/controllers/myctrl.js" %}"></script>
+	<script src="{% static "task2/controllers/myctrl1.js" %}"></script>
 
 	<script src="{% static "task2/config/routes.js" %}"></script>
 	<script src="{% static "task2/directives/FileModel.js" %}"></script>

@@ -11,6 +11,10 @@ angular.module('task2').config(['$stateProvider', '$urlRouterProvider',
         state('page1', {
             url: '/',
             templateUrl: 'static/task2/views/g1.html'
+        }).
+        state('jsplumb', {
+            url: '/jsplumb',
+            templateUrl: 'static/task2/views/jsplumb.html'
         });
         
     }

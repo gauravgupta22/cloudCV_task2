@@ -131,6 +131,13 @@ angular.module('task2').controller('MyCtrl', ['$scope','$http','$log','$uibModal
         });
     };
 
+
+
+
+
+
+    
+
 }]);
 
 angular.module('task2').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, url,title) {
@@ -143,3 +150,5 @@ angular.module('task2').controller('ModalInstanceCtrl', function ($scope, $uibMo
     $uibModalInstance.close();
   };
 });
+
+

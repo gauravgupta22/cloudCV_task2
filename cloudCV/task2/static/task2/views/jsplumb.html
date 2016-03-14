@@ -1,0 +1,117 @@
+<section ng-controller="MyCtrl1">
+
+<div class="container-fluid">
+  <div class="row" >
+
+<div class="col-md-6">
+<div class="flowchart-demo" id="canvas"></div>
+
+</div>
+  <div class="col-md-2">
+
+<div id="elements">
+    <div class="element-group">
+    	<div class="element-head bg-success text-success h4">Input</div>
+    	<div class="element btn btn-default btn-block" draggable="true" id="input" data-type="input" data-detail="input">Input</div>
+    </div>
+    <br>
+    <div class="element-group">
+    	<div class="element-head bg-success text-success h4">Processes</div>
+    	<div class="element btn btn-default btn-block" draggable="true" data-type="process" data-detail="rgb2grayscale" id="rgb2grayscale">RGB2Grayscale</div>
+    	<div class="element btn btn-default btn-block" draggable="true" data-type="process" data-detail="resize" id="resize">Resize</div>
+    	<div class="element btn btn-default btn-block" draggable="true" data-type="process" data-detail="edge_detection" id="edge_detection">Edge Detection</div>
+    	<div class="element btn btn-default btn-block" draggable="true" data-type="process" data-detail="binary_threshold" id="binary_threshold">Binary Threshold</div>
+    	<div class="element btn btn-default btn-block" draggable="true" data-type="process" data-detail="smoothen" id="smoothen">Smoothen</div>
+    	<div class="element btn btn-default btn-block" draggable="true" data-type="process" data-detail="sobel_filter" id="sobel_filter">Sobel Filter</div>
+        <div class="element btn btn-default btn-block" draggable="true" data-type="process" data-detail="image_blending" id="image_blending">Image Blending</div>
+    </div>
+    <br>
+    <div class="element-group">
+    	<div class="element-head bg-success text-success h4">Output</div>
+    	<div class="element btn btn-default btn-block" draggable="true" data-type="output"  id="output" data-detail="output">Output</div>
+    </div>
+</div>
+</div>
+
+<div class="col-md-4">
+	<h4 class=" col-md-6 text-right"style="padding-right:0px;">Set Parameters :</h4>
+    <h4 class="col-md-6 text-leftf " style="padding-left:0px;">&nbsp{{flowchart[id].detail}} Module</h4>
+    
+	<div ng-if="flowchart[id].detail=='input'">
+	<div class="form-group">
+    <label>Image input</label>
+    <div class="text-center bg-success" ng-class="{'hideMessage':!imageSelected}" style="color:green;font-size:15px;margin-bottom:5px;">{{imageSelectedName}} selected</div>
+    <input type="file" file-model="inputs[id]" custom-on-change="uploadFileChanged"/>
+    </div>
+    <b>or choose a Sample image</b>
+    <div class="text-center bg-success" ng-class="{'hideMessage':!sampleImageSelected}" style="color:green;font-size:15px;">Image selected</div>
+     Click on image to select.
+    <a ><img class="img-thumbnail" style="width:200px;height:150px;margin-left:auto;margin-right:auto;display:block;" ng-click="sampleImageUpload('/static/task2/images/sample.jpg',id)" ng-src="/static/task2/images/sample.jpg"></a>
+     <a><img class="img-thumbnail" style="width:200px;height:150px;margin-left:auto;margin-right:auto;display:block;" ng-click="sampleImageUpload('/static/task2/images/sample2.jpg',id)" ng-src="/static/task2/images/sample2.jpg"></a>
+    Nothing is precomputed. It will be treated as fresh upload.
+    </div>
+    <form class="form-horizontal">
+	<div ng-repeat="(name, value) in flowchart[id].params">
+        <div class="form-group">
+		<label for="$index" class="col-sm-4 control-label">{{name}}</label>
+        <div class="col-sm-6">
+		<input type="text" data-ng-model="$parent.flowchart[id].params[name]" class="form-control" id="$index">
+        </div>
+        </div>
+	</div>
+    </form>
+</div>
+</div>
+
+</div>
+<div class="text-center bg-danger" ng-class="{'hideMessage':!showErrorMessage}" style="color:red;font-size:15px;height:20px;">{{postError}}</div>
+<script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">{{modaltitle}}</h3>
+        </div>
+        <div class="modal-body">
+            <img style="width:100%;height:100%" ng-src="{{url}}">
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="back()">Back</button>
+        </div>
+    </script>
+
+<div class="col-md-4 col-md-offset-4">
+<div class="row" style="padding-top:8px;" ng-if="resultUrls.length">
+    
+    
+    
+
+
+
+    
+  <div class="text-center" ng-if="resultUrls.length"><h4 class="text-center" >Intermediate Outputs</h4>select a image to see fullscreen</div><br>
+  <div class="row">
+  <div ng-repeat="choice in resultUrls track by $index">
+  
+
+    <a ng-click="openImageModal($index)"><img class="img-thumbnail" ng-src="{{choice}}"></a>
+    
+    
+  </div>
+  </div>
+</div>
+</div>
+<button ng-click="uploadFile()" class="btn btn-primary btn-lg" style="margin-left:520px;margin-top:20px;margin-bottom:10px;">Submit Flowchart</button>
+<br>
+<div style="margin-left:50px;">
+<b>Instructions:</b><br>
+1.) Drag the elements from the pane and drop on the canvas.<br>
+2.) <b>Double click an element</b> in the flowchart to set its parameters.<br>
+3.) Make connections in the flowchart by dragging from one end point to other.<br>
+4.) One end point can support one input while many outputs can be taken.<br>
+5.) Click on the "Submit flowchart" button to send the vision algo flowchart to server to process.<br>
+6.) Results will be displayed.<br>
+7.) The system is not very robust. Try reloading if an error occurs.<br>
+8.) The results are not marked and their details are not shown due to lack of time.<br>
+</div>
+<br><br>
+<p class="text-center"><b>submitted by Gaurav Gupta &nbsp&nbsp&nbsp&nbsp&nbspemail: gauravguptakgn@gmail.com &nbsp&nbsp&nbsp&nbsp&nbspmo: +917860931204</b></p>
+<div class="loadingmodal" ng-if="wait"><!-- Place at bottom of page --></div>
+</section>

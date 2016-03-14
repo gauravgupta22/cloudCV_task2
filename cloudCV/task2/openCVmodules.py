@@ -8,7 +8,7 @@ from matplotlib import pyplot as plt
 
 def RGB2Grayscale(img,location,params):
 	try:
-		gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+		gray_img = cv2.cvtColor(img[0], cv2.COLOR_BGR2GRAY)
 		cv2.imwrite(location,gray_img)
 		return gray_img
 	except:
@@ -17,7 +17,7 @@ def RGB2Grayscale(img,location,params):
 
 def EdgeDetection(img,location,params):
 	try:
-		edges = cv2.Canny(img,params["minVal"],params["maxVal"])
+		edges = cv2.Canny(img[0],params["minVal"],params["maxVal"])
 		cv2.imwrite(location,edges)
 		return edges
 	except TypeError:
@@ -29,7 +29,7 @@ def EdgeDetection(img,location,params):
 
 def Smoothen(img,location,params):
 	try:
-		blur = cv2.blur(img,(params["width"],params["height"]))
+		blur = cv2.blur(img[0],(params["width"],params["height"]))
 		cv2.imwrite(location,blur)
 		return blur
 	except TypeError:
@@ -39,7 +39,7 @@ def Smoothen(img,location,params):
 
 def SobelFilter(img,location,params):
 	try:
-		sobel = cv2.Sobel(img,cv2.CV_64F,params["xorder"],params["yorder"],ksize=params["ksize"])
+		sobel = cv2.Sobel(img[0],cv2.CV_64F,params["xorder"],params["yorder"],ksize=params["ksize"])
 		cv2.imwrite(location,sobel)
 		return sobel
 	except TypeError:
@@ -49,7 +49,7 @@ def SobelFilter(img,location,params):
 
 def BinaryThreshold(img,location,params):
 	try:
-		ret,thresh = cv2.threshold(img,params["thresholdValue"],params["maxVal"],cv2.THRESH_BINARY)
+		ret,thresh = cv2.threshold(img[0],params["thresholdValue"],params["maxVal"],cv2.THRESH_BINARY)
 		cv2.imwrite(location,thresh)
 		return thresh
 	except TypeError:
@@ -59,7 +59,7 @@ def BinaryThreshold(img,location,params):
 
 def Resize(img,location,params):
 	try:
-		res = cv2.resize(img,(params["width"],params["height"]), interpolation = cv2.INTER_CUBIC)
+		res = cv2.resize(img[0],(params["width"],params["height"]), interpolation = cv2.INTER_CUBIC)
 		cv2.imwrite(location,res)
 		return res
 	except TypeError:
