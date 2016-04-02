@@ -156,6 +156,8 @@ jsPlumb.ready(function () {
                 location: 1,
                 visible:true,
                 id:"ARROW",
+                width:15,
+                length:15,
                 events:{
                     click:function() { alert("you clicked on the arrow overlay")}
                 }
@@ -163,7 +165,7 @@ jsPlumb.ready(function () {
             [ "Label", {
                 location: 0.1,
                 id: "label",
-                cssClass: "aLabel",
+                cssClass: "",
                 events:{
                     tap:function() { alert("hey"); }
                 }
@@ -211,7 +213,7 @@ jsPlumb.ready(function () {
                 lineWidth: 3
             },
             isSource: true,
-            connector: [ "Flowchart", { stub: [40, 60], gap: 10, cornerRadius: 5, alwaysRespectStubs: true } ],
+            connector: [ "Flowchart", { stub: [5, 20], gap: 4, cornerRadius: 5, alwaysRespectStubs: true } ],
             connectorStyle: connectorPaintStyle,
             hoverPaintStyle: endpointHoverStyle,
             maxConnections: -1,
@@ -239,8 +241,8 @@ jsPlumb.ready(function () {
             ]
         },
         init = function (connection) {
-            console.log(connection.sourceId.substring(10));
-            connection.getOverlay("label").setLabel(connection.sourceId.substring(15) + "-" + connection.targetId.substring(15));
+            //console.log(connection.sourceId.substring(10));
+            //connection.getOverlay("label").setLabel(connection.sourceId.substring(15) + "-" + connection.targetId.substring(15));
         };
 
     var _addEndpoints = function (toId, sourceAnchors, targetAnchors) {

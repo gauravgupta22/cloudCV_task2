@@ -92,6 +92,7 @@ path, .jsplumb-endpoint {
     width:100%;
     height:500px;
     border:1px solid black;
+    position: relative;
 
 }
 
@@ -107,4 +108,5 @@ path, .jsplumb-endpoint {
 
 .element {
   cursor: move;
+  position: relative;
 }
